@@ -9,8 +9,8 @@ data Inst =
   deriving Show
 type Code = [Inst]
 
-data Value = 
-    Integer | Bool
+data Value =
+    IValue Integer | BValue Bool
     deriving Show
 
 type Storage = [(String, Value)]
@@ -21,15 +21,14 @@ type Stack = [Value]
 -- Type to represent the machine's state
 type State = (Code, Stack, Storage)
 
-
 createEmptyStack :: Stack
 createEmptyStack = [] 
 
 stack2Str :: Stack -> String
 stack2Str stack = concatMap valueToStr (reverse stack)
-
 valueToStr :: Value -> String
-valueToStr (val) = show val
+valueToStr (IValue i) = show i
+valueToStr (BValue b) = show b
 
 createEmptyState :: State
 createEmptyState = ([], [], [])
